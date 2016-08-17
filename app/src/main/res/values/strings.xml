@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PrimeOrNot</string>
+    <string name="question">Is a Prime Number.</string>
+    <string name="value">37</string>
+</resources>
