@@ -12,7 +12,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:gravity="center_horizontal"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="100dp"
     tools:context="com.hello_world.vikas.primeornot.MainActivity"
     android:id="@+id/textfield"
     style="@style/Base.TextAppearance.AppCompat.Large"
@@ -52,6 +52,7 @@
         />
     </LinearLayout>
 
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="100dp"
@@ -87,9 +88,21 @@
         android:onClick="OnClickNext"
         android:layout_below="@+id/yes"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="#000000"
         android:textColor="#f1fde7"
         android:layout_marginTop="33dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/next"
+        android:id="@+id/linear"
+        >
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,7 +110,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Total Attempts"
         android:id="@+id/textView"
-        android:layout_below="@+id/next"
+        android:layout_below="@+id/linear"
         android:layout_alignParentStart="true"
         android:textSize="20sp"
         android:textColor="#000"
@@ -123,12 +136,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/textView4"
-        android:layout_alignBottom="@+id/textView"
         android:textSize="25sp"
         android:textColor="#000"
         android:textStyle="normal"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignStart="@+id/textView5" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -141,6 +153,47 @@
         android:textStyle="normal"
         android:layout_alignBottom="@+id/textView3"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Hint    "
+        android:id="@+id/hint"
+        android:singleLine="true"
+        android:onClick="OnClickhint"
+        android:drawableRight="@drawable/ic_help_white_24dp"
+        android:nestedScrollingEnabled="true"
+        android:background="#000000"
+        android:textColor="#f1fde7"
+        android:layout_alignTop="@+id/next"
+        android:layout_toStartOf="@+id/next" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignParentStart="true">
+
+
+    </RelativeLayout>
+
+    <Button
+    style="?android:attr/buttonStyleSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="  Cheat  "
+    android:singleLine="true"
+    android:id="@+id/cheat"
+        android:drawableLeft="@drawable/ic_get_app_white_24dp"
+    android:background="#000000"
+    android:textColor="#f1fde7"
+    android:onClick="OnClickcheat"
+        android:layout_alignTop="@+id/next"
+        android:layout_alignStart="@+id/no" />
 
 </RelativeLayout>
 </ScrollView>

@@ -1,6 +1,6 @@
 //Author VIKAS GODARA 2014118
-
 package com.hello_world.vikas.primeornot;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
     Random var1 = new Random();
     public int var,count=0,ACcount=0,flag=0,flag1=0;
@@ -34,6 +33,34 @@ public class MainActivity extends AppCompatActivity {
             ACcount=savedInstanceState.getInt("ACcount");
             flag=savedInstanceState.getInt("flag");
             flag1=savedInstanceState.getInt("flag1");
+            int flag11=savedInstanceState.getInt("flag11");
+            int flag12=savedInstanceState.getInt("flag12");
+            Button btn = (Button) findViewById(R.id.hint);
+            if(flag11==1){
+                btn.setEnabled(true);
+                btn.setBackgroundColor(Color.BLACK);
+                btn.setTextColor(Color.WHITE);
+            }
+            else {
+                btn.setEnabled(false);
+                btn.setBackgroundColor(Color.GRAY);
+                btn.setTextColor(Color.BLACK);
+            }
+                btn = (Button) findViewById(R.id.cheat);
+            if(flag12==1){
+
+                btn.setEnabled(true);
+                btn.setBackgroundColor(Color.BLACK);
+                btn.setTextColor(Color.WHITE);
+            }
+            else {
+
+                btn.setEnabled(false);
+                btn.setBackgroundColor(Color.GRAY);
+                btn.setTextColor(Color.BLACK);
+            }
+            super.onSaveInstanceState(savedInstanceState);
+
         }
         if(flag==1)
         {
@@ -121,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
         t.setText(Integer.toString(count));
         t = (TextView)findViewById(R.id.textView5);
         t.setText(Integer.toString(ACcount));
-
-
     }
 
     @Override
@@ -133,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putInt( "ACcount",ACcount );
         savedInstanceState.putInt( "flag",flag );
         savedInstanceState.putInt( "flag1",flag1 );
+        Button btn = (Button) findViewById(R.id.hint);
+        if(btn.isEnabled())
+            savedInstanceState.putInt( "flag11",1 );
+        else
+            savedInstanceState.putInt( "flag11",0 );
+        btn = (Button) findViewById(R.id.cheat);
+        if(btn.isEnabled())
+            savedInstanceState.putInt( "flag12",1 );
+        else
+            savedInstanceState.putInt( "flag12",0 );
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG,"Saving Instance");
     }
@@ -157,6 +192,14 @@ public class MainActivity extends AppCompatActivity {
         btn1.setTextColor(Color.WHITE);
         btn2.setBackgroundColor(Color.GRAY);
         btn2.setTextColor(Color.BLACK);
+        btn = (Button) findViewById(R.id.cheat);
+        btn.setEnabled(true);
+        btn.setBackgroundColor(Color.BLACK);
+        btn.setTextColor(Color.WHITE);
+        btn = (Button) findViewById(R.id.hint);
+        btn.setEnabled(true);
+        btn.setBackgroundColor(Color.BLACK);
+        btn.setTextColor(Color.WHITE);
 
     }
 
@@ -259,7 +302,48 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public void OnClickcheat(View view) {
+        Intent intent = new Intent(this, cheat_activity.class);
+        String lala = var+"";
+        intent.putExtra("var",lala);
+        startActivityForResult(intent, 2);
+    }
 
+    public void OnClickhint(View view) {
+        Intent intent = new Intent(MainActivity.this, hint_Activity.class);
+        startActivityForResult(intent, 1);
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        boolean flagflag = data.getBooleanExtra("flag1",false);
+        //int flag11= Integer.parseInt(flagflag);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==1 && resultCode==1 && flagflag==true  && data!=null)
+        {
+            Toast.makeText(getApplicationContext(), "Hint has been used", Toast.LENGTH_SHORT).show();
+            Button btn = (Button) findViewById(R.id.hint);
+            btn.setEnabled(false);
+            btn.setBackgroundColor(Color.GRAY);
+            btn.setTextColor(Color.BLACK);
+
+        }
+        if(requestCode==2 && resultCode==2 && flagflag==true  && data!=null)
+        {
+            Toast.makeText(getApplicationContext(), "Cheat has been used", Toast.LENGTH_SHORT).show();
+            Button btn = (Button) findViewById(R.id.cheat);
+            btn.setEnabled(false);
+            btn.setBackgroundColor(Color.GRAY);
+            btn.setTextColor(Color.BLACK);
+            btn = (Button) findViewById(R.id.hint);
+            btn.setEnabled(false);
+            btn.setBackgroundColor(Color.GRAY);
+            btn.setTextColor(Color.BLACK);
+
+        }
+    }
 
     @Override
     public void onStart() {
@@ -291,5 +375,4 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d(TAG, "Inside OnDestroy");
     }
-
 }
